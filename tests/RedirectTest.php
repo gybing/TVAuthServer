@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 $templates = new League\Plates\Engine(dirname(__FILE__).'/../views');
 
-class RedirectTest extends PHPUnit_Framework_TestCase {
+class RedirectTest extends PHPUnit\Framework\TestCase {
 
   public function testEmptyRequest() {
     $controller = new Controller();
@@ -14,7 +14,7 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
     $response = $controller->redirect($request, $response);
 
     $html = $response->getContent();
-    $this->assertContains('Invalid Request', $html);
+    $this->assertStringContainsString('Invalid Request', $html);
   }
 
   public function testInvalidState() {
@@ -25,7 +25,7 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
     $response = $controller->redirect($request, $response);
 
     $html = $response->getContent();
-    $this->assertContains('Invalid State', $html);
+    $this->assertStringContainsString('Invalid State', $html);
   }
 
 }

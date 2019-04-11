@@ -2,7 +2,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyUserCodeTest extends PHPUnit_Framework_TestCase {
+class VerifyUserCodeTest extends PHPUnit\Framework\TestCase {
 
   public function testEmptyRequest() {
     $controller = new Controller();
@@ -12,7 +12,7 @@ class VerifyUserCodeTest extends PHPUnit_Framework_TestCase {
     $response = $controller->verify_code($request, $response);
 
     $error = $response->getContent();
-    $this->assertContains('No code was entered', $error);
+    $this->assertStringContainsString('No code was entered', $error);
   }
 
   public function testInvalidUserCode() {
@@ -23,8 +23,8 @@ class VerifyUserCodeTest extends PHPUnit_Framework_TestCase {
     $response = $controller->verify_code($request, $response);
 
     $error = $response->getContent();
-    $this->assertContains('invalid_request', $error);
-    $this->assertContains('Code not found', $error);
+    $this->assertStringContainsString('invalid_request', $error);
+    $this->assertStringContainsString('Code not found', $error);
   }
 
   public function testRedirectsToAuthServerGivenCode() {
